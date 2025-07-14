@@ -13,11 +13,9 @@ dependencies = [
     "undetected-chromedriver"
 ]
 classifiers = [
-    "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Software Development :: Libraries :: Python Modules",
-    "License :: OSI Approved :: Creative Commons Zero v1.0 Universal (CC0)",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
@@ -25,7 +23,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Operating System :: OS Independent"
 ]
-license = { text = "CC0-1.0" }
+license = { file = "LICENSE" }
 
 [build-system]
 requires = ["setuptools>=61"]
