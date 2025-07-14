@@ -341,14 +341,13 @@ def response_is_pdf(res: requests.Response, raise_error: bool = False) -> bool:
         ...
     requests.exceptions.HTTPError: ...
     """
-    content = res.content.decode("utf-8", errors="replace")
-    if content[1:4] == "PDF":
+    if res.content[1:4] == b"PDF":
         return True
 
     if raise_error:
-        raise ValueError(f'Response content is NOT a pdf -- "{content[:20]}"')
+        raise ValueError(f'Response content is NOT a pdf -- "{res.content[:20]!r}"')
 
-    print(f'Response content is NOT a pdf -- "{content[:20]}"')
+    print(f'Response content is NOT a pdf -- "{res.content[:20]!r}"')
 
     return False
 
