@@ -27,7 +27,7 @@ ScraperETC was built to reduce the friction of browser automation and HTTP scrap
 ## Installation
 
 ```bash
-pip install scraperetc
+pip install scraper-etc
 ```
 
 Requires Python 3.10 or later.
