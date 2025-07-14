@@ -84,6 +84,7 @@ def setup_chrome_driver(
     add_default_options : bool, default True
         If True, appends a set of default options aimed at increasing stability
         and bypassing common certificate or security errors:
+
             [
                 "--ignore-certificate-errors",
                 "--disable-dev-shm-usage",
@@ -92,6 +93,7 @@ def setup_chrome_driver(
                 "--disable-web-security",
                 "--allow-insecure-localhost"
             ]
+            
     additional_options : list of str or None, default None
         A list of additional Chrome command-line options to pass (e.g.,
         `--disable-popup-blocking`, `--start-maximized`). These are passed
