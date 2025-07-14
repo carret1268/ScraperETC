@@ -1,6 +1,6 @@
 # ScraperETC
 
-[![PyPI](https://img.shields.io/pypi/v/scraperetc.svg)](https://pypi.org/project/scraperetc/)  
+[![PyPI](https://img.shields.io/pypi/v/scraper-etc.svg)](https://pypi.org/project/scrape-retc/)  
 [![Documentation Status](https://readthedocs.org/projects/scraperetc/badge/?version=latest)](https://scraperetc.readthedocs.io/en/latest/)  
 [![codecov](https://codecov.io/gh/carret1268/ScraperETC/branch/main/graph/badge.svg)](https://codecov.io/gh/carret1268/ScraperETC)  
 [![CI](https://github.com/carret1268/ScraperETC/actions/workflows/ci.yml/badge.svg)](https://github.com/carret1268/ScraperETC/actions/workflows/ci.yml)
