@@ -15,7 +15,7 @@ from .scraper_etc import (
     request_header,
 )
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 __author__ = "E. Tyler Carr"
 __license__ = "CC0"
 __description__ = "Lightweight utilities for scraping, browser automation, and PDF validation using Selenium and requests."
