@@ -19,3 +19,13 @@ __version__ = "0.1.0"
 __author__ = "E. Tyler Carr"
 __license__ = "CC0"
 __description__ = "Lightweight utilities for scraping, browser automation, and PDF validation using Selenium and requests."
+
+__all__ = [
+    "setup_chrome_driver",
+    "webdriver_wait",
+    "http_GET",
+    "http_GET_valid_pdf",
+    "response_is_valid",
+    "response_is_pdf",
+    "request_header",
+]
