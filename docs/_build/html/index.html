@@ -243,19 +243,28 @@
         <article role="main" id="furo-main-content">
           <section id="scraperetc">
 <h1>ScraperETC<a class="headerlink" href="#scraperetc" title="Link to this heading">¶</a></h1>
-<p><a class="reference external" href="https://pypi.org/project/scraperetc/"><img alt="PyPI" src="https://img.shields.io/pypi/v/scraperetc.svg" /></a>
-<a class="reference external" href="https://scraperetc.readthedocs.io/en/latest/"><img alt="Documentation Status" src="https://readthedocs.org/projects/scraperetc/badge/?version=latest" /></a>
-<a class="reference external" href="https://codecov.io/gh/carret1268/LogicTreeETC"><img alt="codecov" src="https://codecov.io/gh/carret1268/LogicTreeETC/branch/main/graph/badge.svg" /></a>
+<p><a class="reference external" href="https://pypi.org/project/scraperetc/"><img alt="PyPI" src="https://img.shields.io/pypi/v/scraperetc.svg" /></a><br />
+<a class="reference external" href="https://scraperetc.readthedocs.io/en/latest/"><img alt="Documentation Status" src="https://readthedocs.org/projects/scraperetc/badge/?version=latest" /></a><br />
+<a class="reference external" href="https://codecov.io/gh/carret1268/ScraperETC"><img alt="codecov" src="https://codecov.io/gh/carret1268/ScraperETC/branch/main/graph/badge.svg" /></a><br />
 <a class="reference external" href="https://github.com/carret1268/ScraperETC/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/carret1268/ScraperETC/actions/workflows/ci.yml/badge.svg" /></a></p>
-<p>ScraperETC is a lightweight Python package that simplifies browser automation and HTTP response validation using Selenium and the requests library. It includes sensible defaults for scraping safely, support for undetected-chromedriver, PDF verification, and simple wrappers for common tasks.</p>
+<p><strong>ScraperETC</strong> is a lightweight Python package that streamlines browser automation and HTTP scraping. It wraps Selenium and <code class="docutils literal notranslate"><span class="pre">requests</span></code> with clean, Pythonic interfaces that remove the usual boilerplate - especially for waits, drivers, and headers. ScraperETC is designed with <strong>anti-bot detection</strong> in mind, using smart defaults to reduce the chance of blocks or bans.</p>
+<section id="why-use-scraperetc">
+<h2>Why Use ScraperETC?<a class="headerlink" href="#why-use-scraperetc" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Selenium imports are long, clunky, and almost impossible to remember. This package wraps what you need so you don’t have to memorize boilerplate.</p></li>
+<li><p>HTTP requests are often blocked by anti-bot filters. ScraperETC provides default headers that reduce detection without extra effort.</p></li>
+<li><p>Verifying file downloads shouldn’t require writing custom content checks. This package includes built-in PDF validation tools to save you time.</p></li>
+</ul>
+<p>ScraperETC was built to reduce the friction of browser automation and HTTP scraping, especially when using headless Chrome.</p>
+</section>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>Wrapper for <code class="docutils literal notranslate"><span class="pre">selenium.webdriver.Chrome</span></code> and <code class="docutils literal notranslate"><span class="pre">undetected_chromedriver</span></code></p></li>
-<li><p>WebDriverWait abstraction for locating elements with timeouts</p></li>
-<li><p>Simplified <code class="docutils literal notranslate"><span class="pre">requests.get</span></code> interface with default headers</p></li>
-<li><p>PDF content validation and HTTP response checking</p></li>
-<li><p>Optional exception-based error handling</p></li>
+<li><p>Minimal wrappers for <code class="docutils literal notranslate"><span class="pre">selenium.webdriver.Chrome</span></code> and <code class="docutils literal notranslate"><span class="pre">undetected_chromedriver</span></code> to get up and running fast</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">webdriver_wait()</span></code> handles selector validation and <code class="docutils literal notranslate"><span class="pre">WebDriverWait</span></code> behind the scenes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http_GET()</span></code> adds default headers that mimic a modern browser to help you <strong>evade bot detection</strong></p></li>
+<li><p>Built-in tools for <strong>validating PDF downloads</strong> and checking response status</p></li>
+<li><p>Optional exception-raising on failure to let you choose between passive and strict workflows</p></li>
 <li><p><strong>Currently supports only the Chrome web browser</strong>, which must be installed and available on your system <code class="docutils literal notranslate"><span class="pre">PATH</span></code></p></li>
 </ul>
 </section>
@@ -270,13 +279,13 @@
 <h2>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scraper_etc</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_chrome_driver</span><span class="p">,</span> <span class="n">webdriver_wait</span><span class="p">,</span> <span class="n">http_GET_valid_pdf</span>
 
-<span class="c1"># Set up a headless browser</span>
+<span class="c1"># start a headless Chrome driver (using undetected_chromedriver under the hood)</span>
 <span class="n">driver</span> <span class="o">=</span> <span class="n">setup_chrome_driver</span><span class="p">(</span><span class="n">headless</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1"># Wait for a div to appear</span>
+<span class="c1"># wait for a div with a specific ID to appear</span>
 <span class="n">elem</span> <span class="o">=</span> <span class="n">webdriver_wait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s2">&quot;XPATH&quot;</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="s2">&quot;//div[@id=&#39;main&#39;]&quot;</span><span class="p">)</span>
 
-<span class="c1"># Check if a remote file is a valid PDF</span>
+<span class="c1"># validate a remote PDF and save it</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">http_GET_valid_pdf</span><span class="p">(</span><span class="s2">&quot;https://example.com/sample.pdf&quot;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;sample.pdf&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -286,23 +295,26 @@
 </section>
 <section id="development">
 <h2>Development<a class="headerlink" href="#development" title="Link to this heading">¶</a></h2>
-<p>This project uses the following tools for code quality and security:</p>
+<p>ScraperETC includes a modern CI/CD pipeline:</p>
 <ul class="simple">
-<li><p><strong>Ruff</strong>: for fast linting and auto-formatting.</p></li>
-<li><p><strong>mypy</strong>: for static type checking.</p></li>
-<li><p><strong>Bandit</strong>: for security scanning.</p></li>
-<li><p><strong>GitHub Actions CI</strong>: runs tests, type checks, linting, and security checks on every push.</p></li>
-<li><p><strong>Dependabot</strong>: automatically checks for dependency updates.</p></li>
+<li><p><strong>Ruff</strong> for linting and auto-formatting</p></li>
+<li><p><strong>mypy</strong> for static type checking</p></li>
+<li><p><strong>Bandit</strong> for security scanning</p></li>
+<li><p><strong>pytest</strong> with unit tests covering all core logic</p></li>
+<li><p><strong>Codecov</strong> integration for test coverage</p></li>
+<li><p><strong>GitHub Actions CI</strong> to run it all on push</p></li>
+<li><p><strong>Dependabot</strong> for automated dependency updates</p></li>
 </ul>
-<p>See the <a class="reference external" href="https://github.com/carret1268/ScraperETC/tree/main/.github/workflows">.github/workflows/</a> directory for CI configurations.</p>
+<p>CI workflows live in <a class="reference external" href="https://github.com/carret1268/ScraperETC/tree/main/.github/workflows"><code class="docutils literal notranslate"><span class="pre">.github/workflows</span></code></a>.</p>
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h2>
-<p>This project is licensed under CC0 (public domain). See the <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> file for details.</p>
+<p>This project is released under <a class="reference external" href="https://github.com/carret1268/ScraperETC/blob/main/LICENSE">CC0 (public domain)</a>. You are free to use, modify, and redistribute it without restriction.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="scraper_etc.html">ScraperETC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scraper_etc.html#features">Features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scraper_etc.html#scraper_etc.scraper_etc.http_GET"><code class="docutils literal notranslate"><span class="pre">http_GET()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="scraper_etc.html#scraper_etc.scraper_etc.http_GET_valid_pdf"><code class="docutils literal notranslate"><span class="pre">http_GET_valid_pdf()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="scraper_etc.html#scraper_etc.scraper_etc.response_is_pdf"><code class="docutils literal notranslate"><span class="pre">response_is_pdf()</span></code></a></li>
@@ -362,6 +374,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">ScraperETC</a><ul>
+<li><a class="reference internal" href="#why-use-scraperetc">Why Use ScraperETC?</a></li>
 <li><a class="reference internal" href="#features">Features</a></li>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#example-usage">Example Usage</a></li>

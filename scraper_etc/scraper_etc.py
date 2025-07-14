@@ -1,3 +1,28 @@
+"""
+ScraperETC Core Module
+
+This module provides lightweight wrappers around common web scraping operations using
+Selenium and the `requests` library. It is designed to simplify setup, reduce boilerplate,
+and improve stealth when interacting with websites for automated data extraction.
+
+Features
+--------
+- Headless Chrome WebDriver setup via Selenium or undetected-chromedriver
+- Streamlined `requests.get()` wrapper with default anti-bot headers
+- Robust WebDriverWait abstraction with human-readable selectors
+- Built-in validation for PDF content and HTTP response codes
+
+Defaults like user-agent strings and Chrome options are selected to minimize
+bot detection during web scraping tasks.
+
+All functions are usable independently and aim to minimize external dependencies,
+making the module suitable for rapid prototyping, automation scripts, and CI pipelines.
+
+Note
+----
+Only Chrome is supported at this time. Chrome must be installed and on your system PATH.
+"""
+
 from typing import Dict, List, Literal, Optional, Union
 
 import requests

@@ -1,5 +1,5 @@
 [project]
-name = "scraper-etc"
+name = "scraper_etc"
 version = "0.1.0"
 description = "Lightweight utilities for web scraping with requests and Selenium."
 authors = [
@@ -35,6 +35,7 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
+include = ["scraper_etc"]
 
 [tool.ruff]
 lint.ignore = ["E501"]

@@ -243,6 +243,27 @@
         <article role="main" id="furo-main-content">
           <section id="module-scraper_etc.scraper_etc">
 <span id="scraperetc"></span><h1>ScraperETC<a class="headerlink" href="#module-scraper_etc.scraper_etc" title="Link to this heading">¶</a></h1>
+<p>ScraperETC Core Module</p>
+<p>This module provides lightweight wrappers around common web scraping operations using
+Selenium and the <cite>requests</cite> library. It is designed to simplify setup, reduce boilerplate,
+and improve stealth when interacting with websites for automated data extraction.</p>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Headless Chrome WebDriver setup via Selenium or undetected-chromedriver</p></li>
+<li><p>Streamlined <cite>requests.get()</cite> wrapper with default anti-bot headers</p></li>
+<li><p>Robust WebDriverWait abstraction with human-readable selectors</p></li>
+<li><p>Built-in validation for PDF content and HTTP response codes</p></li>
+</ul>
+<p>Defaults like user-agent strings and Chrome options are selected to minimize
+bot detection during web scraping tasks.</p>
+<p>All functions are usable independently and aim to minimize external dependencies,
+making the module suitable for rapid prototyping, automation scripts, and CI pipelines.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only Chrome is supported at this time. Chrome must be installed and on your system PATH.</p>
+</div>
+</section>
 <dl class="py function">
 <dt class="sig sig-object py" id="scraper_etc.scraper_etc.http_GET">
 <span class="sig-prename descclassname"><span class="pre">scraper_etc.scraper_etc.</span></span><span class="sig-name descname"><span class="pre">http_GET</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scraper_etc.scraper_etc.http_GET" title="Link to this definition">¶</a></dt>
@@ -546,6 +567,7 @@ directly to <cite>options.add_argument(…)</cite>.</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">ScraperETC</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
 <li><a class="reference internal" href="#scraper_etc.scraper_etc.http_GET"><code class="docutils literal notranslate"><span class="pre">http_GET()</span></code></a></li>
 <li><a class="reference internal" href="#scraper_etc.scraper_etc.http_GET_valid_pdf"><code class="docutils literal notranslate"><span class="pre">http_GET_valid_pdf()</span></code></a></li>
 <li><a class="reference internal" href="#scraper_etc.scraper_etc.response_is_pdf"><code class="docutils literal notranslate"><span class="pre">response_is_pdf()</span></code></a></li>
