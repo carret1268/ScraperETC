@@ -93,7 +93,7 @@ def setup_chrome_driver(
                 "--disable-web-security",
                 "--allow-insecure-localhost"
             ]
-            
+
     additional_options : list of str or None, default None
         A list of additional Chrome command-line options to pass (e.g.,
         `--disable-popup-blocking`, `--start-maximized`). These are passed

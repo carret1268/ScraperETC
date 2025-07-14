@@ -1,5 +1,5 @@
 [project]
-name = "scraper_etc"
+name = "ScraperETC"
 version = "0.1.0"
 description = "Lightweight utilities for web scraping with requests and Selenium."
 authors = [
