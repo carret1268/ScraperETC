@@ -2,6 +2,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/scraperetc.svg)](https://pypi.org/project/scraperetc/)
 [![Documentation Status](https://readthedocs.org/projects/scraperetc/badge/?version=latest)](https://scraperetc.readthedocs.io/en/latest/)
+[![codecov](https://codecov.io/gh/carret1268/LogicTreeETC/branch/main/graph/badge.svg)](https://codecov.io/gh/carret1268/LogicTreeETC)
 [![CI](https://github.com/carret1268/ScraperETC/actions/workflows/ci.yml/badge.svg)](https://github.com/carret1268/ScraperETC/actions/workflows/ci.yml)
 
 ScraperETC is a lightweight Python package that simplifies browser automation and HTTP response validation using Selenium and the requests library. It includes sensible defaults for scraping safely, support for undetected-chromedriver, PDF verification, and simple wrappers for common tasks.
