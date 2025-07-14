@@ -1,0 +1,7 @@
+# API Reference
+
+```{automodule} scraper_etc.scraper_etc
+:members:
+:undoc-members:
+:show-inheritance:
+```
