@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="ScraperETC" href="index.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-        <title>ScraperETC - ScraperETC 0.1.4 documentation</title>
+        <title>ScraperETC - ScraperETC 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">ScraperETC 0.1.4 documentation</div></a>
+      <a href="index.html"><div class="brand">ScraperETC 0.1.5 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -190,7 +190,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">ScraperETC 0.1.4 documentation</span>
+  <span class="sidebar-brand-text">ScraperETC 0.1.5 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -267,42 +267,39 @@ making the module suitable for rapid prototyping, automation scripts, and CI pip
 <dl class="py function">
 <dt class="sig sig-object py" id="scraper_etc.scraper_etc.http_GET">
 <span class="sig-prename descclassname"><span class="pre">scraper_etc.scraper_etc.</span></span><span class="sig-name descname"><span class="pre">http_GET</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scraper_etc.scraper_etc.http_GET" title="Link to this definition">¶</a></dt>
-<dd><p>Perform a standard HTTP GET request with optional custom headers and timeout.</p>
-<p>This function wraps <cite>requests.get()</cite> to simplify making GET requests with a consistent
-interface. If no headers are provided, a default user-agent and header set are used
-to reduce the likelihood of being flagged as a bot by target websites.</p>
+<dd><p>Waits for a web element (or elements) to meet a specified expected condition
+using Selenium’s WebDriverWait.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>url</strong> (<em>str</em>) – The full URL to request via HTTP GET.</p></li>
-<li><p><strong>header</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>] </em><em>| </em><em>None</em><em>, </em><em>optional</em>) – Optional headers to include in the request. If <cite>None</cite>, a default header mimicking a
-modern browser (e.g., Firefox 128) will be used.</p></li>
-<li><p><strong>timeout</strong> (<em>float</em><em>, </em><em>optional</em>) – Maximum number of seconds to wait for a response before raising a <cite>requests.Timeout</cite>.
-Default is 30 seconds.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The <cite>Response</cite> object containing server response data, including status code, headers,
-and content.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>requests.Response</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>requests.Timeout</strong> – If the server does not send a response within <cite>timeout</cite> seconds.</p></li>
-<li><p><strong>requests.RequestException</strong> – For any other network-related errors encountered during the request.</p></li>
+<li><p><strong>driver</strong> (<em>selenium.webdriver.Chrome</em>) – The WebDriver instance (standard or undetected_chromedriver).</p></li>
+<li><p><strong>by</strong> (<em>{'CSS_SELECTOR'</em><em>, </em><em>'XPATH'</em><em>, </em><em>'ID'</em><em>, </em><em>'CLASS_NAME'</em><em>, </em><em>'NAME'</em><em>, </em><em>'TAG_NAME'</em><em>, </em><em>'LINK_TEXT'}</em>) – The strategy to locate elements. Case-insensitive.</p></li>
+<li><p><strong>selector</strong> (<em>str</em>) – The actual query string to locate the element(s).</p></li>
+<li><p><strong>ec</strong> (<em>{'located'</em><em>, </em><em>'all_located'</em><em>, </em><em>'clickable'}</em><em>, </em><em>default 'located'</em>) – <dl class="simple">
+<dt>The expected condition to wait for:</dt><dd><ul>
+<li><p>’located’: Wait for a single element to be present in the DOM.</p></li>
+<li><p>’all_located’: Wait for all matching elements to be present in the DOM.</p></li>
+<li><p>’clickable’: Wait for an element to be both present and interactable.</p></li>
 </ul>
 </dd>
 </dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">http_GET</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
-<span class="go">200</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
-<span class="go">&#39;&lt;!doctype html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;...&#39;</span>
-</pre></div>
-</div>
+</p></li>
+<li><p><strong>delay</strong> (<em>float</em><em>, </em><em>default 10</em>) – Maximum number of seconds to wait before raising a TimeoutException.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A single WebElement for ‘located’ and ‘clickable’, or a list of WebElements for ‘all_located’.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>WebElement or list of WebElement</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If <cite>by</cite> or <cite>ec</cite> is not one of the accepted values.</p></li>
+<li><p><strong>selenium.common.exceptions.TimeoutException</strong> – If the expected condition is not met before the timeout period.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -486,7 +483,7 @@ directly to <cite>options.add_argument(…)</cite>.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="scraper_etc.scraper_etc.webdriver_wait">
-<span class="sig-prename descclassname"><span class="pre">scraper_etc.scraper_etc.</span></span><span class="sig-name descname"><span class="pre">webdriver_wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">driver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scraper_etc.scraper_etc.webdriver_wait" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">scraper_etc.scraper_etc.</span></span><span class="sig-name descname"><span class="pre">webdriver_wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">driver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'located'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scraper_etc.scraper_etc.webdriver_wait" title="Link to this definition">¶</a></dt>
 <dd><p>Wait for a specific web element to be present in the DOM using Selenium’s WebDriverWait.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -585,7 +582,7 @@ directly to <cite>options.add_argument(…)</cite>.</p></li>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=fd825880"></script>
+</div><script src="_static/documentation_options.js?v=59fadc99"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>

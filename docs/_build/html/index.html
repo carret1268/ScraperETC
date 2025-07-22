@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="ScraperETC" href="scraper_etc.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-        <title>ScraperETC 0.1.4 documentation</title>
+        <title>ScraperETC 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">ScraperETC 0.1.4 documentation</div></a>
+      <a href="#"><div class="brand">ScraperETC 0.1.5 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -190,7 +190,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
   
-  <span class="sidebar-brand-text">ScraperETC 0.1.4 documentation</span>
+  <span class="sidebar-brand-text">ScraperETC 0.1.5 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -243,7 +243,8 @@
         <article role="main" id="furo-main-content">
           <section id="scraperetc">
 <h1>ScraperETC<a class="headerlink" href="#scraperetc" title="Link to this heading">¶</a></h1>
-<p><a class="reference external" href="https://pypi.org/project/scrape-retc/"><img alt="PyPI" src="https://img.shields.io/pypi/v/scraper-etc.svg" /></a><br />
+<p><a class="reference external" href="https://pypi.org/project/scraper-etc/"><img alt="PyPI" src="https://img.shields.io/pypi/v/scraper-etc.svg" /></a><br />
+<a class="reference external" href="https://github.com/carret1268/ScraperETC"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-ScraperETC-blue?logo=github" /></a>
 <a class="reference external" href="https://scraperetc.readthedocs.io/en/latest/"><img alt="Documentation Status" src="https://readthedocs.org/projects/scraperetc/badge/?version=latest" /></a><br />
 <a class="reference external" href="https://codecov.io/gh/carret1268/ScraperETC"><img alt="codecov" src="https://codecov.io/gh/carret1268/ScraperETC/branch/main/graph/badge.svg" /></a><br />
 <a class="reference external" href="https://github.com/carret1268/ScraperETC/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/carret1268/ScraperETC/actions/workflows/ci.yml/badge.svg" /></a></p>
@@ -251,7 +252,8 @@
 <section id="why-use-scraperetc">
 <h2>Why Use ScraperETC?<a class="headerlink" href="#why-use-scraperetc" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>Selenium imports are long, clunky, and almost impossible to remember. This package wraps what you need so you don’t have to memorize boilerplate.</p></li>
+<li><p>Selenium imports are long, clunky, and almost impossible to remember. ScraperETC lets you write <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">scraper_etc</span> <span class="pre">import</span> <span class="pre">By</span></code> and use <code class="docutils literal notranslate"><span class="pre">By.ID</span></code>, <code class="docutils literal notranslate"><span class="pre">By.XPATH</span></code>, etc., directly.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">webdriver_wait()</span></code> simplifies waiting for elements with built-in selector validation and multiple wait modes (<code class="docutils literal notranslate"><span class="pre">located</span></code>, <code class="docutils literal notranslate"><span class="pre">all_located</span></code>, <code class="docutils literal notranslate"><span class="pre">clickable</span></code>).</p></li>
 <li><p>HTTP requests are often blocked by anti-bot filters. ScraperETC provides default headers that reduce detection without extra effort.</p></li>
 <li><p>Verifying file downloads shouldn’t require writing custom content checks. This package includes built-in PDF validation tools to save you time.</p></li>
 </ul>
@@ -261,7 +263,14 @@
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Minimal wrappers for <code class="docutils literal notranslate"><span class="pre">selenium.webdriver.Chrome</span></code> and <code class="docutils literal notranslate"><span class="pre">undetected_chromedriver</span></code> to get up and running fast</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">webdriver_wait()</span></code> handles selector validation and <code class="docutils literal notranslate"><span class="pre">WebDriverWait</span></code> behind the scenes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">webdriver_wait()</span></code> handles selector validation and <code class="docutils literal notranslate"><span class="pre">WebDriverWait</span></code> with three modes:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;located&quot;</span></code>: wait for a single element to appear</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;all_located&quot;</span></code>: wait for multiple matching elements</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;clickable&quot;</span></code>: wait until the element is ready to be interacted with</p></li>
+</ul>
+</li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">By</span></code> directly from <code class="docutils literal notranslate"><span class="pre">scraper_etc</span></code>, so you don’t have to remember where Selenium hides it</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">http_GET()</span></code> adds default headers that mimic a modern browser to help you <strong>evade bot detection</strong></p></li>
 <li><p>Built-in tools for <strong>validating PDF downloads</strong> and checking response status</p></li>
 <li><p>Optional exception-raising on failure to let you choose between passive and strict workflows</p></li>
@@ -270,20 +279,26 @@
 </section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>scraperetc
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>scraper-etc
 </pre></div>
 </div>
 <p>Requires Python 3.10 or later.</p>
 </section>
 <section id="example-usage">
 <h2>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scraper_etc</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_chrome_driver</span><span class="p">,</span> <span class="n">webdriver_wait</span><span class="p">,</span> <span class="n">http_GET_valid_pdf</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scraper_etc</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_chrome_driver</span><span class="p">,</span> <span class="n">webdriver_wait</span><span class="p">,</span> <span class="n">http_GET_valid_pdf</span><span class="p">,</span> <span class="n">By</span>
 
 <span class="c1"># start a headless Chrome driver (using undetected_chromedriver under the hood)</span>
 <span class="n">driver</span> <span class="o">=</span> <span class="n">setup_chrome_driver</span><span class="p">(</span><span class="n">headless</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># wait for a div with a specific ID to appear</span>
-<span class="n">elem</span> <span class="o">=</span> <span class="n">webdriver_wait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s2">&quot;XPATH&quot;</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="s2">&quot;//div[@id=&#39;main&#39;]&quot;</span><span class="p">)</span>
+<span class="n">elem</span> <span class="o">=</span> <span class="n">webdriver_wait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
+
+<span class="c1"># wait for a clickable button (alternative usage)</span>
+<span class="n">button</span> <span class="o">=</span> <span class="n">webdriver_wait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s2">&quot;XPATH&quot;</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="s2">&quot;//button&quot;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s2">&quot;clickable&quot;</span><span class="p">)</span>
+
+<span class="c1"># use imported By class directly with driver methods</span>
+<span class="n">different_ele</span> <span class="o">=</span> <span class="n">drive</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="s2">&quot;differentID&quot;</span><span class="p">)</span>
 
 <span class="c1"># validate a remote PDF and save it</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">http_GET_valid_pdf</span><span class="p">(</span><span class="s2">&quot;https://example.com/sample.pdf&quot;</span><span class="p">)</span>
@@ -309,7 +324,7 @@
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h2>
-<p>This project is released under <a class="reference external" href="https://github.com/carret1268/ScraperETC/blob/main/LICENSE">CC0 (public domain)</a>. You are free to use, modify, and redistribute it without restriction.</p>
+<p>This project is released under CC0 (public domain). You are free to use, modify, and redistribute it without restriction.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -391,7 +406,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=fd825880"></script>
+</div><script src="_static/documentation_options.js?v=59fadc99"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>
