@@ -147,8 +147,9 @@ def webdriver_wait(
         "CSS_SELECTOR", "XPATH", "ID", "CLASS_NAME", "NAME", "TAG_NAME", "LINK_TEXT"
     ],
     selector: str,
+    ec: Literal["located", "all_located", "clickable"] = "located",
     delay: float = 10,
-) -> WebElement:
+) -> Union[WebElement, List[WebElement]]:
     """
     Wait for a specific web element to be present in the DOM using Selenium's WebDriverWait.
 
@@ -200,52 +201,58 @@ def webdriver_wait(
                 "['CSS_SELECTOR', 'XPATH', 'ID', 'CLASS_NAME', 'NAME', 'TAG_NAME', 'LINK_TEXT']"
             )
 
-    return WebDriverWait(driver, delay).until(
-        EC.presence_of_element_located((by_object, selector))
-    )
+    if ec == "located":
+        return WebDriverWait(driver, delay).until(
+            EC.presence_of_element_located((by_object, selector))
+        )
+    elif ec == "all_located":
+        return WebDriverWait(driver, delay).until(
+            EC.presence_of_all_elements_located((by_object, selector))
+        )
+    elif ec == "clickable":
+        return WebDriverWait(driver, delay).until(
+            EC.element_to_be_clickable((by_object, selector))
+        )
+    else:
+        raise ValueError(
+            f"Invalid ec type: '{ec}'. Must be one of ['located', 'all_located', 'clickable']"
+        )
 
 
 def http_GET(
     url: str, header: Optional[Dict[str, str]] = None, timeout: float = 30
 ) -> requests.Response:
     """
-    Perform a standard HTTP GET request with optional custom headers and timeout.
-
-    This function wraps `requests.get()` to simplify making GET requests with a consistent
-    interface. If no headers are provided, a default user-agent and header set are used
-    to reduce the likelihood of being flagged as a bot by target websites.
+    Waits for a web element (or elements) to meet a specified expected condition
+    using Selenium's WebDriverWait.
 
     Parameters
     ----------
-    url : str
-        The full URL to request via HTTP GET.
-    header : dict[str, str] | None, optional
-        Optional headers to include in the request. If `None`, a default header mimicking a
-        modern browser (e.g., Firefox 128) will be used.
-    timeout : float, optional
-        Maximum number of seconds to wait for a response before raising a `requests.Timeout`.
-        Default is 30 seconds.
+    driver : selenium.webdriver.Chrome
+        The WebDriver instance (standard or undetected_chromedriver).
+    by : {'CSS_SELECTOR', 'XPATH', 'ID', 'CLASS_NAME', 'NAME', 'TAG_NAME', 'LINK_TEXT'}
+        The strategy to locate elements. Case-insensitive.
+    selector : str
+        The actual query string to locate the element(s).
+    ec : {'located', 'all_located', 'clickable'}, default 'located'
+        The expected condition to wait for:
+            - 'located': Wait for a single element to be present in the DOM.
+            - 'all_located': Wait for all matching elements to be present in the DOM.
+            - 'clickable': Wait for an element to be both present and interactable.
+    delay : float, default 10
+        Maximum number of seconds to wait before raising a TimeoutException.
 
     Returns
     -------
-    requests.Response
-        The `Response` object containing server response data, including status code, headers,
-        and content.
+    WebElement or list of WebElement
+        A single WebElement for 'located' and 'clickable', or a list of WebElements for 'all_located'.
 
     Raises
     ------
-    requests.Timeout
-        If the server does not send a response within `timeout` seconds.
-    requests.RequestException
-        For any other network-related errors encountered during the request.
-
-    Examples
-    --------
-    >>> response = http_GET("https://example.com")
-    >>> print(response.status_code)
-    200
-    >>> print(response.text[:100])
-    '<!doctype html><html lang="en"><head>...'
+    ValueError
+        If `by` or `ec` is not one of the accepted values.
+    selenium.common.exceptions.TimeoutException
+        If the expected condition is not met before the timeout period.
     """
     if header is None:
         header = request_header

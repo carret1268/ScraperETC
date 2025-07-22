@@ -13,9 +13,10 @@ from .scraper_etc import (
     response_is_valid,
     response_is_pdf,
     request_header,
+    By,
 )
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 __author__ = "E. Tyler Carr"
 __license__ = "CC0"
 __description__ = "Lightweight utilities for scraping, browser automation, and PDF validation using Selenium and requests."
@@ -28,4 +29,5 @@ __all__ = [
     "response_is_valid",
     "response_is_pdf",
     "request_header",
+    "By",
 ]
