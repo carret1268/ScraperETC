@@ -164,8 +164,10 @@ def test_webdriver_wait_valid(mock_wait, mock_ec):
 
     # smoke tests for different by values
     element = webdriver_wait(mock_driver, by="id", selector="//div")
-    element = webdriver_wait(mock_driver, by="tag_name", selector="//div")
-    element = webdriver_wait(mock_driver, by="name", selector="//div")
+    element = webdriver_wait(
+        mock_driver, by="tag_name", selector="//div", ec="all_located"
+    )
+    element = webdriver_wait(mock_driver, by="name", selector="//div", ec="clickable")
     element = webdriver_wait(mock_driver, by="link_text", selector="//div")
     element = webdriver_wait(mock_driver, by="class_name", selector="//div")
 
@@ -177,6 +179,15 @@ def test_webdriver_wait_invalid_by():
         webdriver_wait(mock_driver, by="WRONG", selector="foo")
 
     assert "Invalid selector type" in str(excinfo.value)
+
+
+def test_webdriver_wait_invalid_ec():
+    mock_driver = MagicMock()
+
+    with pytest.raises(ValueError) as excinfo:
+        webdriver_wait(mock_driver, by="ID", selector="foo", ec="all_clickable")
+
+    assert "Invalid ec type" in str(excinfo.value)
 
 
 @patch("scraper_etc.scraper_etc.WebDriverWait")
